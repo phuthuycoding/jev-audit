@@ -36,7 +36,8 @@ single API call — no text generation, no parsing — typically ~300ms.
 
 ## Test results (real API, `jev-1.13.0`)
 
-- **79-case corpus → 100% strict accuracy** across secrets, injection,
+- **79-case corpus → 100% strict accuracy** (`EVAL.md`: secret F1 = 1.00,
+  vuln F1 = 0.98 @ threshold 0.8) across secrets, injection,
   deserialization, web vulns, placeholders, safe code, and git-diff semantics
   (see [REPORT.md](REPORT.md)). Jev understands diff context — a commit that
   *removes* a hardcoded secret passes; the same key on a `+` line blocks.
@@ -89,6 +90,8 @@ run_tests.py    # corpus runner → REPORT.md
 bench.py        # large-context benchmark → BENCHMARK.md
 REPORT.md       # full test matrix + findings
 BENCHMARK.md    # size/latency/token-limit results
+EVAL.md         # model eval: confusion matrix, P/R/F1, threshold sweep
+eval_model.py   # eval runner → EVAL.md
 ```
 
 ## Notes
