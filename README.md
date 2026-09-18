@@ -67,6 +67,17 @@ guardrail audit src/         # audit every text file under a directory
 guardrail install-hook       # wire `guardrail audit` into .git/hooks/pre-commit
 ```
 
+## Try it on the bundled examples
+
+```sh
+guardrail audit examples/leaky.py        # fake secrets    → ❌ BLOCKED
+guardrail audit examples/vulnerable.py   # SQLi/CMDi/XSS   → ❌ BLOCKED
+guardrail audit examples/messy.py        # poor quality    → ⚠️ WARN + PASSED
+guardrail audit examples/clean.py        # clean code      → ✅ PASSED
+```
+
+All secrets in `examples/` and `test_cases.py` are fabricated for testing.
+
 ## Verdicts
 
 - `has_secret_leak > 0.8` or `has_vulnerability > 0.8` → **❌ COMMIT BLOCKED**, exit 1
